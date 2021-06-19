@@ -11,3 +11,9 @@ Steps to create a similar web server from scrach:
 5. Read the request in chunks (1024 bytes each) and store it in a StreamBuilder
 6. Extract Separate Server and HTTP classes
 7. Parse the HTTP request
+8. Create routing table which should allow variuos HTTP methods
+9. Make sure the HTTP server can populate the routing table
+10. Create specific HTTP response classes - TextResponse, for example
+11. Implement the toString method for the HTTP response class
+12. Implement the routing table for the storing and retrieving request mapping
+13. Use the routing table in the HTTP server  for the actual request matching
