@@ -19,3 +19,5 @@ Steps to create a similar web server from scrach:
 13. Use the routing table in the HTTP server  for the actual request matching
 14. Separate the URL and parse the query string if it exist
 15. Introduce the option to use the request by storing request-response functions in the routing table
+16. Introduce base controllers and extract common functionalities
+17. Shorten the route syntax and add support for controllers
