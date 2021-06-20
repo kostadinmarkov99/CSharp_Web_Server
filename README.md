@@ -13,7 +13,7 @@ Steps to create a similar web server from scrach:
 7. Parse the HTTP request
 8. Create routing table which should allow variuos HTTP methods
 9. Make sure the HTTP server can populate the routing table
-10. Create specific HTTP response classes - TextResponse, for example
+10. Create specific HTTP response classes - TextResponse, for example 
 11. Implement the toString method for the HTTP response class
 12. Implement the routing table for the storing and retrieving request mapping
 13. Use the routing table in the HTTP server  for the actual request matching
@@ -26,3 +26,4 @@ Steps to create a similar web server from scrach:
 20. Add functionality to find specific views by path and by convention
 21. Make sure the project copies the view files into the output directory
 22. Add functionality in the base controller class to get the view and controller names by convention
+23. Add functionality to parse the request from when the specific content type is present
