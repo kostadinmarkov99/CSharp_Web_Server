@@ -22,3 +22,7 @@ Steps to create a similar web server from scrach:
 16. Introduce base controllers and extract common functionalities
 17. Shorten the route syntax and add support for controllers
 18. Add redirect HTTP responses and and use the Location header to control the flow
+19. Add view response class and reuse functionality from the HTML response for setting the content
+20. Add functionality to find specific views by path and by convention
+21. Make sure the project copies the view files into the output directory
+22. Add functionality in the base controller class to get the view and controller names by convention
