@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyWebServer.Server.Controllers;
+using WebServer.Models.Animals;
 
 namespace WebServer.Controllers
 {
@@ -20,18 +21,21 @@ namespace WebServer.Controllers
         public HttpResponse Cats()
         {
             const string nameKey = "Name";
+            const string ageKey = "Age";
 
             var query = this.Request.Query;
 
             var catName = query.ContainsKey(nameKey) ? query[nameKey] : "the cats";
 
-            var result = $"<h1>Hello from the {catName}!</h1>";
+            var catAge = query.ContainsKey(ageKey) ? int.Parse(query[ageKey]) : 0;
 
-            if (query.ContainsKey("Name"))
+            var viewModel = new CatViewModel
             {
+                Name = catName,
+                Age = catAge
+            };
 
-            }
-            return Html(result);
+            return View(viewModel);
         }
 
         public HttpResponse Dogs() => View();
