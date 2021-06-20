@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.Server.Responses
+namespace MyWebServer.Server.Results
 {
-    public class NotFoundResponse : HttpResponse
+    public class BadRequestResult : HttpResponse
     {
-        public NotFoundResponse() : base(HttpStatusCode.NotFound)
+        public BadRequestResult() : base (HttpStatusCode.BadRequest)
         {
-
         }
+
     }
 }

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.Server.Responses
+namespace MyWebServer.Server.Results
 {
-    public class HtmlResponse : ContentResponse
+    public class HtmlResult : ContentResult
     {
-        public HtmlResponse(string html) : base(html, HttpContentType.Html)
+        public HtmlResult(HttpResponse response, string html) : base(response, html, HttpContentType.Html)
         {
 
         }

@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.Server.Responses
+namespace MyWebServer.Server.Results
 {
-    public class ViewResponse : HttpResponse
+    public class ViewResult : ActionResult
     {
         private readonly string filePath;
 
         private const char PathSeparator = '/';
-        public ViewResponse(string viewPath, string controllerName, object model) : base(HttpStatusCode.OK)
+        public ViewResult(HttpResponse response, string viewPath, string controllerName, object model) : base(response)
             => this.GetHtml(viewPath, controllerName, model);
 
         private void GetHtml(string viewName, string controllerName, object model)

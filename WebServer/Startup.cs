@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using MyWebServer.HttpServer;
-using MyWebServer.Server.Responses;
+using MyWebServer.Server.Results    ;
 using WebServer.Controllers;
 using MyWebServer.Server.Controllers;
 
@@ -20,6 +20,7 @@ namespace WebServer
                         .MapGet<AnimalsController>("/Dogs", c => c.Dogs())
                         .MapGet<AnimalsController>("/Bunnies", c => c.Bunnies())
                         .MapGet<AnimalsController>("/Turtles", c => c.Turtles())
+                        .MapGet<AccountController>("/Cookies", c => c.ActionWithCookie())
                         .MapGet<CatsController>("/Cats/Create", c => c.Create())
                         .MapPost<CatsController>("/Cats/Save", c => c.Save())
                         ).Start();

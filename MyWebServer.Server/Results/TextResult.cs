@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyWebServer.Server.Responses
+namespace MyWebServer.Server.Results
 {
-    public class TextResponse : ContentResponse
+    public class TextResult : ContentResult
     { 
-        public TextResponse(string text) : base(text, HttpContentType.PlainText)
+        public TextResult(HttpResponse response, string text) : base(response,text, HttpContentType.PlainText)
         {
         }
     }

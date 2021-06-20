@@ -7,18 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyWebServer.Server.Http
 {
-    public class HttpHeader
+    public class HttpCookie
     {
-
-        public const string ContentType = "Content-Type";
-        public const string ContentLength = "Content-Length";
-        public const string Server = "Server";
-        public const string Date = "Date";
-        public const string Location = "Location";
-        public const string SetCookie = "Set-Cookie";
-        public const string Cookie = "Cookie";
-
-        public HttpHeader(string name, string value)
+        public HttpCookie(string name, string value)
         {
             Guard.AgainsNull(name, nameof(name));
             Guard.AgainsNull(value, nameof(value));
@@ -30,6 +21,6 @@ namespace MyWebServer.Server.Http
         public string Value { get; init; }
 
         public override string ToString() =>
-            $"{this.Name}: {this.Value}";
+           $"{this.Name}={this.Value}";
     }
 }
