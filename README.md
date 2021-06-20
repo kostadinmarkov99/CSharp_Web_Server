@@ -21,3 +21,4 @@ Steps to create a similar web server from scrach:
 15. Introduce the option to use the request by storing request-response functions in the routing table
 16. Introduce base controllers and extract common functionalities
 17. Shorten the route syntax and add support for controllers
+18. Add redirect HTTP responses and and use the Location header to control the flow

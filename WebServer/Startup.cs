@@ -12,10 +12,14 @@ namespace WebServer
 {
     class Program
     {
-        public static async Task Main() => await new HttpServer(routingTable => routingTable
+        public static async Task Main() =>
+                    await new HttpServer(routingTable => routingTable
                         .MapGet<HomeController>("/", c => c.Index())
+                        .MapGet<HomeController>("/ToCats", c => c.LocalRedirect())
                         .MapGet<AnimalsController>("/Cats", c => c.Cats())
-                        .MapGet<AnimalsController>("/Dogs", c => c.Dogs())).Start();
+                        .MapGet<AnimalsController>("/Dogs", c => c.Dogs())
+                        .MapGet<HomeController>("/softuni", c => c.ToSoftUni())    
+                        ).Start();
 
     }
 }

@@ -17,5 +17,9 @@ namespace WebServer.Controllers
         }
         public HttpResponse Index()
             => Text("Hello From Kostadin!");
+
+        public HttpResponse LocalRedirect() => Redirect("/Cats");
+
+        public HttpResponse ToSoftUni() => Redirect("https://softuni.bg");
     }
 }
