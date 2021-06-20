@@ -17,3 +17,5 @@ Steps to create a similar web server from scrach:
 11. Implement the toString method for the HTTP response class
 12. Implement the routing table for the storing and retrieving request mapping
 13. Use the routing table in the HTTP server  for the actual request matching
+14. Separate the URL and parse the query string if it exist
+15. Introduce the option to use the request by storing request-response functions in the routing table
