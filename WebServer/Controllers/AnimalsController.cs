@@ -38,7 +38,12 @@ namespace WebServer.Controllers
             return View(viewModel);
         }
 
-        public HttpResponse Dogs() => View();
+        public HttpResponse Dogs() => View(new DogViewModel
+        {
+            Name = "Rex",
+            Age = 3,
+            Breed = "Street perfect"
+        });
 
         public HttpResponse Bunnies()
          => View("Rabbits");
