@@ -9,6 +9,7 @@ namespace MyWebServer.Server.Http
 {
     public class HttpResponse
     {
+
         public HttpResponse(HttpStatusCode statusCode)
         { 
             this.StatusCode = statusCode;
@@ -23,6 +24,12 @@ namespace MyWebServer.Server.Http
         public IDictionary<string, HttpCookie> Cookies { get; } = new Dictionary<string, HttpCookie>();
 
         public string Content { get; protected set; }
+
+        public static HttpResponse ForError(string message)
+            => new HttpResponse(HttpStatusCode.InternalServerError)
+            {
+                Content = message
+            };
 
         public void AddHeader(string name, string value)
         {

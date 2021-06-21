@@ -8,7 +8,9 @@ namespace MyWebServer.Server.Http
 {
     public class HttpRequest
     {
-        private const string NewLine = "\r\n"; 
+        private static Dictionary<string, HttpSession> Sessions = new();
+
+        private const string NewLine = "\r\n";
         public HttpMethod Method { get; private set; }
 
         public string Path { get; private set; }
@@ -19,6 +21,8 @@ namespace MyWebServer.Server.Http
 
         public IReadOnlyDictionary<string, HttpHeader> Headers { get; private set; }
         public IReadOnlyDictionary<string, HttpCookie> Cookies { get; private set; }
+
+        public HttpSession Session { get; private set; }
 
         public string Body { get; private set; }
 
@@ -38,6 +42,8 @@ namespace MyWebServer.Server.Http
 
             var cookies = ParseCookies(headers);
 
+            var session = GetSession(cookies);
+
             var bodyLines = lines.Skip(headers.Count + 2).ToArray();
 
             var body = string.Join(NewLine, bodyLines);
@@ -51,15 +57,35 @@ namespace MyWebServer.Server.Http
                 Query = query,
                 Headers = headers,
                 Cookies = cookies,
+                Session = session,
                 Body = body,
                 Form = form
             };
+        }
+
+        private static HttpSession GetSession(Dictionary<string, HttpCookie> cookies)
+        {
+            var sessionId = cookies.ContainsKey(HttpSession.SessionCookieName) ? cookies[HttpSession.SessionCookieName].Value : Guid.NewGuid().ToString();
+
+            if (!Sessions.ContainsKey(sessionId))
+            {
+                Sessions[sessionId] = new HttpSession(sessionId);
+            }
+
+            return Sessions[sessionId];
+
+
         }
 
         /*private static string[] getStartLine(string request)
         {
 
         }*/
+
+        public override string ToString()
+        {
+            return null;
+        }
 
         private static HttpMethod ParseMethod(string method)
         {
@@ -69,7 +95,7 @@ namespace MyWebServer.Server.Http
                 "POST" => HttpMethod.Post,
                 "PUT" => HttpMethod.Put,
                 "DELETE" => HttpMethod.Delete,
-                _ => HttpMethod.Get //throw new InvalidOperationException($"Method {method} is not supported!")
+                _ => throw new InvalidOperationException($"Method {method} is not supported!")
             };
         }
 
@@ -83,8 +109,8 @@ namespace MyWebServer.Server.Http
             return (path, query);
         }
 
-        private static Dictionary<string, string> ParseQuery(string queryString) 
-            =>  queryString
+        private static Dictionary<string, string> ParseQuery(string queryString)
+            => queryString
             .Split('&')
             .Select(part => part.Split('='))
             .Where(part => part.Length == 2)
@@ -104,7 +130,7 @@ namespace MyWebServer.Server.Http
 
                 var indexOfColon = headerLine.IndexOf(":");
 
-                if(indexOfColon < 2)
+                if (indexOfColon < 2)
                 {
                     throw new InvalidOperationException("Request is not valid!");
                 }
@@ -148,7 +174,7 @@ namespace MyWebServer.Server.Http
 
         private static Dictionary<string, string> ParseForm(Dictionary<string, HttpHeader> headers, string body)
         {
-            var result = new Dictionary<string, string>();  
+            var result = new Dictionary<string, string>();
 
             if (headers.ContainsKey(HttpHeader.ContentType) && headers[HttpHeader.ContentType].Value == HttpContentType.FormUrlEncoded)
             {
